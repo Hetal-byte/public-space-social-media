@@ -70,7 +70,7 @@ class PublicSpaceApp {
         const data = this.isLogin ? { email, password } : { username, email, password };
         
         try {
-            const response = await fetch(`http://localhost:3000${endpoint}`, {
+            const response = await fetch(`http://localhost:3001${endpoint}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

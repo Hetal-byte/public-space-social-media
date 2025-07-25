@@ -8,12 +8,12 @@ const path = require('path');
 const fs = require('fs');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 const JWT_SECRET = 'your-secret-key-change-this-in-production';
 
 // Middleware
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://127.0.0.1:3000'],
+    origin: ['http://localhost:3001', 'http://127.0.0.1:3001'],
     credentials: true
 }));
 app.use(bodyParser.json());
