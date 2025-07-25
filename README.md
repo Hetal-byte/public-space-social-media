@@ -1,299 +1,225 @@
-Public Space Social Media Platform - Complete Documentation
-Project Overview
-A comprehensive Node.js-based social media application that implements a unique friend-based posting limitation system. The platform encourages social connections by restricting posting capabilities based on the number of friends a user has.
 
-Core Features
-User Authentication System
-Registration: New user signup with username, email, and password
+# 📢 Public Space – Friend-Gated Social Media Platform
 
-Login: Secure authentication using JWT tokens
+A **Node.js-powered social network** that flips the script on traditional platforms. In this world, your social circle isn’t just clout—it’s your **posting fuel**. No friends? No posts. More friends? More power. Welcome to a social space where quality connections = expression.
 
-Session Management: Token-based authentication with 24-hour expiration
+---
 
-Password Security: bcryptjs hashing for secure password storage
+## 🔍 Project Overview
 
-Social Networking Capabilities
-Friend System: Add friends using email addresses
+This is a dynamic full-stack web app built using **Node.js + Express** on the backend and **Vanilla JS, HTML5, and CSS3** on the frontend. It introduces a gamified posting system that encourages organic connection growth by limiting post frequency based on a user's friend count.
 
-Friend Validation: Prevents duplicate friendships and self-friending
+---
 
-Social Metrics: Real-time friend count tracking
+## 🚀 Core Features
 
-Network Growth: Encourages user engagement through friend connections
+### 🔐 User Authentication
 
-Dynamic Posting System
-The platform's unique feature is its friend-based posting restrictions:
+- **Register** with username, email & password  
+- **Login** with secure JWT-based session  
+- **Token Expiry** after 24 hours  
+- **Password Encryption** via `bcryptjs`  
 
-0 friends: Cannot create any posts
+### 👥 Friend System
 
-1 friend: Limited to 1 post per day
+- Add friends via **email**
+- Smart checks: ❌ No self-friends or duplicates
+- Real-time **friend counter**  
+- Social growth fuels platform interaction
 
-2-9 friends: Limited to 2 posts per day
+### 📝 Friend-Gated Posting Rules
 
-10+ friends: Unlimited posting privileges
+| Friends | Posts/Day |
+|---------|-----------|
+| 0       | ❌ None   |
+| 1       | 1         |
+| 2–9     | 2         |
+| 10+     | 🔓 Unlimited |
 
-Post Management
-Content Creation: Text-based posts with optional media attachments
+### 📸 Post Management
 
-Media Support:
+- Text + optional **media attachments**
+- Supported Media:
+  - Images: `jpeg`, `jpg`, `png`, `gif`
+  - Videos: `mp4`, `mov`, `avi`, `mkv`
+- File Limit: **50MB max**
+- Features:
+  - ❤️ Like/unlike
+  - 💬 Commenting
+  - 🔁 Share tracking
+  - 🔄 Real-time metrics
 
-Images: JPEG, JPG, PNG, GIF formats
+---
 
-Videos: MP4, MOV, AVI, MKV formats
+## 🏗️ Tech Stack
 
-File Size: 50MB maximum per upload
+### Backend
 
-Post Interactions:
+- **Express.js** - Web framework
+- **JWT** - Session security
+- **bcryptjs** - Password hashing
+- **Multer** - Media file uploads
+- **CORS** - Secure cross-origin access
+- **Body-parser** - Flexible request parsing
 
-Like/unlike functionality
+### Frontend
 
-Comment system
+- **Vanilla JS** - Dynamic UI logic
+- **HTML5** - Semantic structure
+- **CSS3** - Clean, responsive layout
 
-Share counter with tracking
+---
 
-Real-time Updates: Instant engagement metrics
+## 💾 Data Handling
 
-Technical Architecture
-Backend Technology Stack
-Framework: Express.js for robust web application structure
+Currently using **in-memory storage** for:
 
-Security:
+- Users & credentials  
+- Posts, media, likes, comments  
+- Friend relationships  
+- JWT session tokens
 
-CORS configuration for secure cross-origin requests
+⚠️ **Note**: Replace with **MongoDB**, **PostgreSQL**, or other DB for production.
 
-JWT authentication for session management
+---
 
-bcryptjs for password encryption
+## ⚙️ Installation & Setup
 
-File Handling:
+### 🔧 Prerequisites
 
-Multer middleware for file upload processing
-
-File system operations for media management
-
-Request Processing: Body-parser for handling various request formats
-
-Frontend Implementation
-Core Technologies:
-
-Vanilla JavaScript for client-side functionality
-
-HTML5 semantic structure
-
-CSS3 with modern styling approaches
-
-Design Features:
-
-Responsive layout for mobile compatibility
-
-Gradient backgrounds and modern UI elements
-
-Interactive user interface components
-
-Data Management
-Currently implements in-memory storage for:
-
-User account information and credentials
-
-Post content, metadata, and engagement data
-
-Friend relationship mappings
-
-Session management data
-
-Note: Production deployment should integrate a persistent database solution
-
-Installation and Setup
-Prerequisites Installation
-
+```bash
 npm install
-Required Dependencies
-The application automatically installs these packages:
+```
 
-Production Dependencies:
+### 📦 Dependencies
 
-bcryptjs ^2.4.3 - Password hashing and security
+#### Production:
+- `bcryptjs`
+- `body-parser`
+- `cors`
+- `express`
+- `jsonwebtoken`
+- `multer`
 
-body-parser ^1.20.3 - Request parsing middleware
+#### Dev:
+- `nodemon` – auto-reloads server during development
 
-cors ^2.8.5 - Cross-origin resource sharing
+### 🌍 Run the App
 
-express ^4.21.2 - Web application framework
+- **Dev Mode**  
+  ```bash
+  npm run dev
+  ```
 
-jsonwebtoken ^9.0.2 - JWT token management
+- **Production Mode**  
+  ```bash
+  npm start
+  ```
 
-multer ^1.4.5-lts.1 - File upload handling
+- **Default Access Points**  
+  - Localhost: `http://localhost:3000`  
+  - Network: `http://0.0.0.0:3000`
 
-Development Dependencies:
+---
 
-nodemon ^3.0.1 - Development server with auto-restart
+## 📡 API Endpoints
 
-Server Configuration
-Development Environment:
+### 🔐 Authentication
 
-npm run dev
-Production Environment:
+**Register** – `POST /api/register`  
+Fields: `username`, `email`, `password`  
+Returns: JWT token + user data
 
-npm start
-Access Points:
+**Login** – `POST /api/login`  
+Fields: `email`, `password`  
+Returns: JWT token + session info
 
-Local development: http://localhost:3000
+### 👤 User Info
 
-Network access: http://0.0.0.0:3000
+**Get Info** – `GET /api/user/info`  
+Auth: ✅ Required  
+Returns: Friend count, post limit, posting eligibility
 
-API Documentation
-Authentication Endpoints
-User Registration
+### 🤝 Friend Actions
 
-Endpoint: POST /api/register
+**Add Friend** – `POST /api/friends/add`  
+Body: `email`  
+Validates: no self/duplicate adds
 
-Purpose: Create new user accounts
+### 📝 Post Actions
 
-Required Fields: username, email, password
+**Create Post** – `POST /api/posts`  
+Auth: ✅ Required  
+Body: text + optional media file  
+Checks: file size, type, daily limit
 
-Returns: JWT token and user information
+**Get Posts** – `GET /api/posts`  
+Returns: all posts + interaction stats
 
-User Login
+**Like** – `POST /api/posts/:postId/like`  
+Toggles like status
 
-Endpoint: POST /api/login
+**Comment** – `POST /api/posts/:postId/comment`  
+Field: `comment`  
+Returns: comment object
 
-Purpose: Authenticate existing users
+**Share** – `POST /api/posts/:postId/share`  
+Increments share counter
 
-Required Fields: email, password
+---
 
-Returns: JWT token and session data
+## 📁 Project Structure
 
-User Management
-User Information Retrieval
-
-Endpoint: GET /api/user/info
-
-Purpose: Get comprehensive user statistics
-
-Authentication: Required
-
-Returns: Friend count, daily post limits, posting eligibility
-
-Friend Management
-
-Endpoint: POST /api/friends/add
-
-Purpose: Add new friends by email
-
-Authentication: Required
-
-Validation: Prevents duplicate and self-friendships
-
-Post Management System
-Post Creation
-
-Endpoint: POST /api/posts
-
-Purpose: Create new posts with optional media
-
-Authentication: Required
-
-Features: Content validation, posting limit enforcement
-
-File Support: Images and videos with size restrictions
-
-Post Retrieval
-
-Endpoint: GET /api/posts
-
-Purpose: Fetch all posts with engagement data
-
-Authentication: Required
-
-Returns: Posts with like status and interaction counts
-
-Post Interaction Endpoints
-Like Management
-
-Endpoint: POST /api/posts/:postId/like
-
-Purpose: Toggle like status on posts
-
-Returns: Updated like count and status
-
-Comment System
-
-Endpoint: POST /api/posts/:postId/comment
-
-Purpose: Add comments to posts
-
-Validation: Comment content required
-
-Returns: Comment data with user information
-
-Share Functionality
-
-Endpoint: POST /api/posts/:postId/share
-
-Purpose: Increment share counter
-
-Returns: Updated share count
-
-File Structure and Organization
-text
+```
 project-root/
-├── server.js          # Main application server and API endpoints
-├── index.html         # Frontend HTML structure and layout
-├── script.js          # Client-side JavaScript functionality
-├── style.css          # Responsive CSS styling and design
-├── package.json       # Project configuration and dependencies
-├── package-lock.json  # Dependency version locking
-└── uploads/           # Media file storage directory
-Configuration Details
-Default Application Settings
-Server Port: 3000 (configurable via PORT environment variable)
+├── server.js          # Server + API routes
+├── index.html         # UI structure
+├── script.js          # Frontend logic
+├── style.css          # Styling & responsiveness
+├── package.json       # Config & dependencies
+├── uploads/           # Uploaded media files
+└── README.md          # You're here!
+```
 
-JWT Secret: 'your-secret-key-change-this-in-production' (Change for production)
+---
 
-Upload Directory: './uploads'
+## 🔐 Security Summary
 
-File Size Limit: 50MB maximum
+- **Passwords** hashed before storage
+- **JWTs** for session validation
+- **CORS** restricted origin access
+- **Upload Validations**:
+  - File type & size enforced
+  - Directory isolated
+- **Rate limiting** via posting logic
 
-Supported Formats: Images (JPEG, JPG, PNG, GIF) and Videos (MP4, MOV, AVI, MKV)
+---
 
-Security Implementation
-Password Protection: bcrypt hashing before database storage
+## 🌍 Browser & UX Compatibility
 
-Session Security: JWT token authentication for protected routes
+- JS: Uses modern **ES6+**
+- Media: Upload via `FormData`
+- API: Uses native **Fetch**
+- Storage: LocalStorage (temporary/session state)
+- Layout: Fully **responsive design**
 
-File Validation: Strict file type and size checking
+---
 
-CORS Protection: Configured for secure cross-origin requests
+## 🧠 Developer Notes
 
-Request Limiting: Size limits to prevent abuse and attacks
+> "Post less, connect more."
 
-Storage Architecture
-The application currently uses in-memory storage for rapid development and testing:
+This project’s friend-gated interaction model reduces spam, increases meaningful content, and introduces a growth-based incentive structure.
 
-User Data: Account credentials and profile information
+🔮 Future Upgrades:
+- MongoDB/PostgreSQL integration
+- User feed algorithms
+- Real-time notifications via WebSockets
+- Admin/moderator dashboard
+- Story feature, profile customization
 
-Post Content: Text, media URLs, and engagement metrics
+---
 
-Social Connections: Friend relationships and network data
+## 🏁 License
 
-Session Data: Active user sessions and authentication tokens
-
-Production Recommendation: Implement a robust database solution such as PostgreSQL or MongoDB for persistent data storage.
-
-Browser Compatibility
-The application supports modern web browsers with:
-
-JavaScript: ES6+ features and syntax
-
-Network: Fetch API for HTTP requests
-
-File Handling: FormData for media uploads
-
-Storage: Local storage for client-side data persistence
-
-Responsive Design: Mobile-first approach with flexible layouts
-
-Development Notes
-This social media platform demonstrates modern web development practices while implementing a unique gamification approach to social networking. The friend-based posting system encourages users to build meaningful connections before gaining full platform privileges, potentially reducing spam and promoting quality interactions.
-
-The current implementation serves as a solid foundation for a production-ready social media application, with clear upgrade paths for database integration, advanced security features, and scalability improvements.
+MIT License. Open-source. Do your thing 🤘
